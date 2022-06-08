@@ -7,13 +7,13 @@ import (
 	"gorm.io/gorm"
 )
 
-func NewAuthRepository(db *gorm.DB) AuthRepository {
-	return &authRepository{db: db}
-}
-
 type AuthRepository interface {
 	CreateUser(ctx context.Context, user entities.User) error
-	FetchUser(ctx context.Context, phone, password string) (*entities.User, error)
+	FetchUserByPhone(ctx context.Context, phone string) (*entities.User, error)
+}
+
+func NewAuthRepository(db *gorm.DB) AuthRepository {
+	return &authRepository{db: db}
 }
 
 type authRepository struct {
@@ -24,8 +24,8 @@ func (a *authRepository) CreateUser(ctx context.Context, user entities.User) err
 	return a.db.WithContext(ctx).Create(&user).Error
 }
 
-func (a *authRepository) FetchUser(ctx context.Context, phone, password string) (*entities.User, error) {
+func (a *authRepository) FetchUserByPhone(ctx context.Context, phone string) (*entities.User, error) {
 	var user entities.User
-	err := a.db.WithContext(ctx).Where("phone = ?", phone).Where("password = ?", password).First(&user).Error
+	err := a.db.WithContext(ctx).Where("phone = ?", phone).First(&user).Error
 	return &user, err
 }
