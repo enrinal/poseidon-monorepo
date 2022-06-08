@@ -1,6 +1,6 @@
 package entities
 
-type Auth struct {
+type User struct {
 	Model
 	Name     string `json:"name"`
 	Phone    string `json:"phone"`
