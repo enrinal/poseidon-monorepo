@@ -1,5 +1,0 @@
-build:
-  docker:
-    web: build/Dockerfile
-  run:
-    web: start
