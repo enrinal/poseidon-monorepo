@@ -1,0 +1,14 @@
+version: "3"
+services:
+  api:
+    container_name: auth-svc
+    image: auth-svc
+    build:
+      context: .
+      dockerfile: build/Dockerfile
+      args:
+        - appName=auth-svc
+        - appPath=.
+    command: start
+    ports:
+      - "8080:8080"
