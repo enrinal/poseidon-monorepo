@@ -3,6 +3,6 @@ services:
   api:
     build: .
     ports:
-      - "8080:8080"
+      - "8088:8088"
     env_file:
       - .env

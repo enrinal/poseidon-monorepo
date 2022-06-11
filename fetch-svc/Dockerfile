@@ -11,12 +11,8 @@ WORKDIR /usr/app
 COPY package*.json ./
 RUN npm install --production
 
-COPY --from=builder /usr/app/dist ./dist
-
-COPY ormconfig.docker.json ./ormconfig.json
+COPY . .
 COPY .env .
 
-RUN ls
-
-EXPOSE 8080
-CMD node dist/src/server.js
+EXPOSE 8088
+CMD ["npm", "run", "start"]
