@@ -9,5 +9,5 @@ func RegisterRouterAPIV1(router *gin.RouterGroup, authSvc services.AuthService) 
 	userAPI := NewAuthAPI(authSvc)
 	router.POST("/users", userAPI.CreateUser)
 	router.POST("/users/login", userAPI.Login)
-	router.POST("/users/claims", userAPI.Claims)
+	router.GET("/claims", userAPI.Claims)
 }

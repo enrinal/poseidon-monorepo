@@ -29,13 +29,3 @@ func (l *LoginRequest) Validate() error {
 		validation.Field(&l.Password, validation.Required),
 	)
 }
-
-type TokenRequest struct {
-	Token string `json:"token"`
-}
-
-func (t *TokenRequest) Validate() error {
-	return validation.ValidateStruct(t,
-		validation.Field(&t.Token, validation.Required),
-	)
-}
