@@ -54,7 +54,7 @@ Auth App
 
 Fetch App
 
-> https://mighty-journey-31573.herokuapp.com/
+> https://shrouded-escarpment-89745.herokuapp.com
 
 ## Tech Stack
 
