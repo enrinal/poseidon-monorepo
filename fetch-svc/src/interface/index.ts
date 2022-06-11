@@ -8,10 +8,6 @@ export interface TokenPayload {
   exp: number;
 }
 
-// contoh menggunakan. req: Request<UserResgiterInput>
-// dengan medefinisikan req sebagai tipe dari Request<UserResgiterInput>
-// sekarang kita bisa mengkases semua property yang dimiliki oleh UserResiterInput
-// id req.body, sebagai contoh: req.body.name , req.body.email ...
 export type Request<ReqBody = any> = ExpressRequest<
   ParamsDictionary,
   any,

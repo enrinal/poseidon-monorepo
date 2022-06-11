@@ -5,7 +5,7 @@ import routers from "./routers";
 import errorHandler from "./middlewares/errorHandler";
 
 const app = express();
-
+app.name;
 app.use(express.json());
 app.use(routers);
 app.use(errorHandler);

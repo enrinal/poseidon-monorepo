@@ -7,6 +7,7 @@ export function generateToken(payload: TokenPayload) {
 }
 
 export function decodeToken(token: string): TokenPayload {
+  token = token.replace("Bearer ", "");
   const payload = jwt.verify(
     token,
     process.env.JWT_SECRET as string

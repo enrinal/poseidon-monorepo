@@ -9,10 +9,6 @@ export default function errorHandler(
   res: Response,
   next: NextFunction
 ) {
-  // Jika error instanceof HttpError.
-  // HttpError merupakan parent dari NotFoundError, BadRequestParent, ...
-  // Sehingga jika error merupakan instance dari salah satu childern HttpError
-  // maka err juka instance dari HttpError.
   if (err instanceof HttpError) {
     res.status(err.getStatusCode());
     res.json({ error: err.getErrorMessage() });

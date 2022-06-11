@@ -1,6 +1,5 @@
 import { NextFunction, Response } from "express";
 import { decodeToken } from "../helpers/tokenizer";
-import { UnautorizedError } from "../core/errors";
 import { RequestContext } from "../interface";
 
 export async function IsAuthenticated(
