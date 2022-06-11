@@ -9,7 +9,11 @@ export default class ClaimsController {
   ) {
     try {
       const loggedInUser = req.context!.auth;
-      res.json(loggedInUser);
+      const response = {
+        message: "success",
+        data: loggedInUser,
+      };
+      res.json(response);
     } catch (error) {
       next(error);
     }

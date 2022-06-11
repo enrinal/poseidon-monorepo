@@ -33,7 +33,12 @@ export default class CommodityController {
       });
     }
 
-    res.json(returnData);
+    const response = {
+      message: "success",
+      data: returnData,
+    };
+
+    res.json(response);
   }
 
   public static async fetchCommodityAggregated(
@@ -118,13 +123,13 @@ export default class CommodityController {
         month,
         week,
         province_area: keyArr[0],
-        size_stat: {
+        size_aggregate: {
           min: minSize,
           max: maxSize,
           median: medianSize,
           avg: avgSize,
         },
-        price_stat: {
+        price_aggregate: {
           min: minPrice,
           max: maxPrice,
           median: medianPrice,
@@ -133,6 +138,11 @@ export default class CommodityController {
       });
     }
 
-    res.json(result);
+    const response = {
+      message: "success",
+      data: result,
+    };
+
+    res.json(response);
   }
 }

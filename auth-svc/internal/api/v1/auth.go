@@ -41,7 +41,12 @@ func (a authAPI) Login(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, response)
+	res := dto.SuccessResponse{
+		Message: "success",
+		Data:    response,
+	}
+
+	c.JSON(http.StatusOK, res)
 }
 
 func (a authAPI) CreateUser(c *gin.Context) {
@@ -62,7 +67,12 @@ func (a authAPI) CreateUser(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, response)
+	res := dto.SuccessResponse{
+		Message: "success",
+		Data:    response,
+	}
+
+	c.JSON(http.StatusOK, res)
 }
 
 func (a authAPI) Claims(c *gin.Context) {
@@ -78,5 +88,10 @@ func (a authAPI) Claims(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, response)
+	res := dto.SuccessResponse{
+		Message: "success",
+		Data:    response,
+	}
+
+	c.JSON(http.StatusOK, res)
 }

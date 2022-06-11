@@ -1,0 +1,25 @@
+version: "3"
+services:
+  auth-api:
+    container_name: auth-svc
+    image: auth-svc
+    build:
+      context: auth-svc
+      dockerfile: build/Dockerfile
+      args:
+        - appName=auth-svc
+        - appPath=.
+    command: start
+    ports:
+      - "8080:8080"
+  
+  fetch-api:
+    container_name: fetch-svc
+    image: fetch-svc
+    build:
+      context: fetch-svc
+      dockerfile: build/Dockerfile
+    ports:
+      - "8088:8088"
+    env_file:
+      - fetch-svc/.env

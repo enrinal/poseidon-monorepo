@@ -1,0 +1,194 @@
+openapi: 3.0.1
+info:
+  title: Poseidon - Auth-SVC
+  description: Auth-SVC API
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+tags:
+  - name: auth
+    description: Auth Service
+paths:
+  /api/v1/claims:
+    get:
+      security:
+        - bearerAuth: []
+      tags: 
+        - auth
+      description: Auto generated using Swagger Inspector
+      responses:
+        "200":
+          $ref: "#/components/responses/GetClaims"
+      servers:
+        - url: http://localhost:8080
+    servers:
+      - url: http://localhost:8080
+  /api/v1/users:
+    post:
+      tags: 
+        - auth
+      description: Auto generated using Swagger Inspector
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role:
+                  type: string
+                phone:
+                  type: string
+                name:
+                  type: string
+            examples:
+              '0':
+                value: |-
+                  {
+                      "name": "john doe",
+                      "phone": "628123123123",
+                      "role": "admin"
+                  }
+      responses:
+        '200':
+          $ref: "#/components/responses/CreateUser"
+      servers:
+        - url: http://localhost:8080
+    servers:
+      - url: http://localhost:8080
+  /api/v1/users/login:
+    post:
+      tags: 
+        - auth
+      description: Auto generated using Swagger Inspector
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                phone:
+                  type: string
+            examples:
+              '0':
+                value: |-
+                  {
+                      "phone": "628123123123",
+                      "password": "OPN2"
+                  }
+      responses:
+        '200':
+          $ref: "#/components/responses/Login"
+      servers:
+        - url: http://localhost:8080
+    servers:
+      - url: http://localhost:8080
+components:
+  securitySchemes:
+    bearerAuth:            # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT 
+  responses:
+    GetClaims:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            description: ""
+            type: object
+            x-examples:
+              example-1:
+                message: Success
+                data:
+                  - name: "John Doe"
+                    phone: "628123123123"
+                    role: "admin"
+                    exp: 1579098983
+            properties:
+              message:
+                type: string
+                minLength: 1
+              data:
+                type: object
+                uniqueItems: true
+                minItems: 1
+            required:
+              - message
+              - data
+          examples:
+            example-1:
+              value:
+                message: string
+                data:
+                  - name: string
+                    phone: string
+                    role: string
+                    exp: int 
+    CreateUser:
+      description: Example response 
+      content:
+        application/json:
+          schema:
+              description: ""
+              type: object
+              x-examples:
+                example-1:
+                  message: Success
+                  data:
+                    - name: "John Doe"
+                      phone: "628123123123"
+                      role: "admin"
+                      password: "OPN2"
+              properties:
+                message:
+                  type: string
+                  minLength: 1
+                data:
+                  type: object
+                  uniqueItems: true
+                  minItems: 1
+              required:
+                - message
+                - data
+          examples:
+              example-1:
+                value:
+                  message: string
+                  data:
+                    - name: string
+                      phone: string
+                      role: string
+                      password: string
+    Login:
+      description: Example response
+      content:
+        application/json:
+          schema:
+              description: ""
+              type: object
+              x-examples:
+                example-1:
+                  message: Success
+                  data:
+                    - token: "jwt_token"
+              properties:
+                message:
+                  type: string
+                  minLength: 1
+                data:
+                  type: object
+                  uniqueItems: true
+                  minItems: 1
+              required:
+                - message
+                - data
+          examples:
+              example-1:
+                value:
+                  message: string
+                  data:
+                    - token: string                       
+
+

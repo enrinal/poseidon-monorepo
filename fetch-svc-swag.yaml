@@ -1,0 +1,358 @@
+openapi: 3.0.1
+info:
+  title: Poseidon - Fetch-SVC
+  description: Fetch-SVC API
+  version: '0.1'
+servers:
+  - url: http://localhost:8088
+tags:
+  - name: fetch
+    description: Fetch Service  
+paths:
+  /api/v1/claims:
+    get:
+      tags: 
+        - fetch
+      description: Auto generated using Swagger Inspector
+      responses:
+        '200':
+          $ref: '#/components/responses/GetClaims'
+      servers:
+        - url: http://localhost:8088
+    servers:
+      - url: http://localhost:8088
+  /api/v1/commodity/aggregated:
+    get:
+      tags: 
+        - fetch
+      description: Auto generated using Swagger Inspector
+      responses:
+        '200':
+          $ref: '#/components/responses/FetchAggregated'
+      servers:
+        - url: http://localhost:8088
+    servers:
+      - url: http://localhost:8088
+  /api/v1/commodity:
+    get:
+      tags: 
+        - fetch
+      description: Auto generated using Swagger Inspector
+      responses:
+        '200':
+          $ref: "#/components/responses/Fetch"
+      servers:
+        - url: http://localhost:8088
+    servers:
+      - url: http://localhost:8088
+components:
+  securitySchemes:
+    bearerAuth:           
+      type: http
+      scheme: bearer
+      bearerFormat: JWT 
+  schemas:
+    KomoditasAggregated:
+      type: object
+      properties:
+        year:
+          type: string
+        month:
+          type: string
+        week:
+          type: string
+        province_area:
+          type: string
+        size_aggregate:
+          type: object
+          properties:
+            min:
+              type: integer
+            max:
+              type: integer
+            median:
+              type: integer
+            avg:
+              type: integer
+        price_aggregate:
+          type: object
+          properties:
+            min:
+              type: integer
+            max:
+              type: integer
+            median:
+              type: integer
+            avg:
+              type: integer
+      required:
+        - year
+        - month
+        - week
+        - province_area
+        - size_aggregate
+        - price_aggregate
+      x-examples:
+        example-1:
+          year: "2020"
+          month: "01"
+          week: "01"
+          province_area: "Jawa Timur"
+          size_aggregate:
+            min: 0
+            max: 0
+            median: 0
+            avg: 0
+          price_aggregate:
+            min: 0
+            max: 0
+            median: 0
+            avg: 0
+        examples:
+            - year: string
+              month: string
+              week: string
+              province_area: string
+              size_aggregate:
+                min: integer
+                max: integer
+                median: integer
+                avg: integer
+              price_aggregate:
+                min: integer
+                max: integer
+                median: integer
+                avg: integer      
+    Komoditas:
+      description: ""
+      type: object
+      properties:
+        uuid:
+          type: string
+        komoditas:
+          type: string
+        area_provinsi:
+          type: string
+        area_kota:
+          type: string
+        size:
+          type: string
+        price:
+          type: string
+        price_usd:
+          type: string
+          minLength: 1
+        tgl_parsed:
+          type: string
+        timestamp:
+          type: string
+      required:
+        - uuid
+        - komoditas
+        - area_provinsi
+        - area_kota
+        - size
+        - price
+        - price_usd
+        - tgl_parsed
+        - timestamp
+      x-examples:
+        example-1:
+          uuid: ""
+          komoditas: ""
+          area_provinsi: ""
+          area_kota: ""
+          size: ""
+          price: ""
+          price_usd: "0"
+          tgl_parsed: ""
+          timestamp: ""
+        examples:
+        - uuid: string
+          komoditas: string
+          area_provinsi: string
+          area_kota: string
+          size: string
+          price: string
+          price_usd: string
+          tgl_parsed: string
+          timestamp: string
+  responses:
+    GetClaims:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            description: ""
+            type: object
+            x-examples:
+              example-1:
+                message: Success
+                data:
+                  - name: "John Doe"
+                    phone: "628123123123"
+                    role: "admin"
+                    exp: 1579098983
+            properties:
+              message:
+                type: string
+                minLength: 1
+              data:
+                type: object
+                uniqueItems: true
+                minItems: 1
+            required:
+              - message
+              - data
+          examples:
+            example-1:
+              value:
+                message: string
+                data:
+                  - name: string
+                    phone: string
+                    role: string
+                    exp: int 
+    FetchAggregated:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            description: Example response
+            type: object
+            x-examples:
+              example-1:
+                message: "success"
+                data:
+                  - year: "2020"
+                    month: "01"
+                    week: "01"
+                    province_area: "Jawa Timur"
+                    size_aggregate:
+                      min: 0
+                      max: 0
+                      median: 0
+                      avg: 0
+                    price_aggregate:
+                      min: 0
+                      max: 0
+                      median: 0
+                      avg: 0
+                  - year: "2020"
+                    month: "01"
+                    week: "02"
+                    province_area: "Jawa Timur"
+                    size_aggregate:
+                      min: 0
+                      max: 0
+                      median: 0
+                      avg: 0
+                    price_aggregate:
+                      min: 0
+                      max: 0
+                      median: 0
+                      avg: 0  
+            properties:
+              message:
+                type: string
+                minLength: 1
+              data:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  $ref: "#/components/schemas/KomoditasAggregated"
+            required:
+              - message
+              - data
+          examples:
+            example-1:
+              value:
+                message: "success"
+                data:
+                - year: "2020"
+                  month: "01"
+                  week: "01"
+                  province_area: "Jawa Timur"
+                  size_aggregate:
+                    min: 0
+                    max: 0
+                    median: 0
+                    avg: 0
+                  price_aggregate:
+                    min: 0
+                    max: 0
+                    median: 0
+                    avg: 0
+                - year: "2020"
+                  month: "01"
+                  week: "02"
+                  province_area: "Jawa Timur"
+                  size_aggregate:
+                    min: 0
+                    max: 0
+                    median: 0
+                    avg: 0
+                  price_aggregate:
+                    min: 0
+                    max: 0
+                    median: 0
+                    avg: 0                    
+    Fetch:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            description: ""
+            type: object
+            x-examples:
+              example-1:
+                message: Success
+                data:
+                  - uuid: ""
+                    komoditas: ""
+                    area_provinsi: okodme
+                    area_kota: jawa barat
+                    size: bandung
+                    price: "10"
+                    price_usd: "0.0006966578"
+                    tgl_parsed: ""
+                    timestamp: ""
+                  - uuid: ""
+                    komoditas: "fisheries:83d60541-e2ea-46fd-a4f3-e82b7943fcd2"
+                    area_provinsi: Bandeng
+                    area_kota: JAWA BARAT
+                    size: CIREBON
+                    price: "60"
+                    price_usd: "0.0041799466"
+                    tgl_parsed: "34000"
+                    timestamp: "2022-02-23T06:54:58.241Z"
+            properties:
+              message:
+                type: string
+                minLength: 1
+              data:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  $ref: "#/components/schemas/Komoditas"
+            required:
+              - message
+              - data
+          examples:
+            example-1:
+              value:
+                message: string
+                data:
+                  - uuid: string
+                    komoditas: string
+                    area_provinsi: string
+                    area_kota: string
+                    size: string
+                    price: string
+                    price_usd: string
+                    tgl_parsed: string
+                    timestamp: string    
+security:
+  - bearerAuth: []      
