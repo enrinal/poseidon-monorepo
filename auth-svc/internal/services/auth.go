@@ -3,6 +3,7 @@ package services
 import (
 	"context"
 	"errors"
+	"strings"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
@@ -91,7 +92,9 @@ func (a *authService) Login(ctx context.Context, request dto.LoginRequest) (*dto
 }
 
 func (a *authService) Claim(ctx context.Context, tokenString string) (*dto.TokenResponse, error) {
-	token, err := jwt.ParseWithClaims(tokenString, &dto.TokenResponse{}, func(token *jwt.Token) (interface{}, error) {
+	tokenStr := strings.Replace(tokenString, "Bearer ", "", -1)
+
+	token, err := jwt.ParseWithClaims(tokenStr, &dto.TokenResponse{}, func(token *jwt.Token) (interface{}, error) {
 		return []byte(shared.JWTKey), nil
 	})
 

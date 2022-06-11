@@ -66,18 +66,13 @@ func (a authAPI) CreateUser(c *gin.Context) {
 }
 
 func (a authAPI) Claims(c *gin.Context) {
-	var request dto.TokenRequest
-	if err := c.ShouldBindJSON(&request); err != nil {
-		c.Error(errors.NewError(http.StatusBadRequest, err.Error()))
+	token := c.GetHeader("Authorization")
+	if token == "" {
+		c.Error(errors.NewError(http.StatusBadRequest, "token is required"))
 		return
 	}
 
-	if err := request.Validate(); err != nil {
-		c.Error(errors.NewError(http.StatusBadRequest, err.Error()))
-		return
-	}
-
-	response, err := a.authService.Claim(c, request.Token)
+	response, err := a.authService.Claim(c, token)
 	if err != nil {
 		c.Error(errors.NewError(http.StatusInternalServerError, err.Error()))
 		return
